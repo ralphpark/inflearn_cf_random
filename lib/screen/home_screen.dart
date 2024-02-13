@@ -2,6 +2,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:inflearn_cf_random/component/number_row.dart';
 import 'package:inflearn_cf_random/constant/color.dart';
 import 'package:inflearn_cf_random/screen/settings_sereen.dart';
 
@@ -37,7 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void onPressedSettings () async{
     final result = await Navigator.of(context).push<int>(
       MaterialPageRoute(
-        builder: (context) => SettingScreen(),
+        builder: (context) => SettingScreen(
+          maxNumber: maxNumber,
+        ),
       ),
     );
     if(result != null) {
@@ -100,17 +103,7 @@ class _Body extends StatelessWidget {
               (e) =>
               Padding(
                 padding:  EdgeInsets.only(bottom: e.key == 2 ? 0 : 16),
-                child: Row(
-                  children: e.value
-                      .toString()
-                      .split('')
-                      .map(
-                        (y) =>
-                        Image.asset(
-                          'asset/img/$y.png', width: 50, height: 70,
-                        ),
-                  ).toList(),
-                ),
+                child: NumberRow(number: e.value),
               ),
         ).toList(),
       ),
